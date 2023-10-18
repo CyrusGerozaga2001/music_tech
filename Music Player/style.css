@@ -1,0 +1,325 @@
+
+body {
+  /* Set an initial background image (replace 'initial-background.jpg' with your image URL) */
+  background-image: url('https://images.pexels.com/photos/17483120/pexels-photo-17483120/free-photo-of-colorful-abstract-background-paper-composition.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+  background-size: cover; /* Ensure background image covers the entire viewport */
+  background-repeat: no-repeat; /* Prevent background image from repeating */
+  background-attachment: fixed; /* Keeps the background image fixed as the page scrolls */
+  /* You can also add other background properties as needed */
+  transition: background-image 0.5s; /* Smooth transition for background image changes */
+}
+
+.player {
+  width: 80%; /* Set the width to 80% of the viewport width */
+  max-width: 400px; /* Set a maximum width to prevent it from getting too wide */
+  height: auto; /* Allow the height to adjust based on content */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.8);
+  border: 2px solid white;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  margin: auto; /* Center the player horizontally */
+  position: center; /* Position relative for the centering to work */
+  top: 0%; /* Move the player down by half of its height */
+  transform: translateY(-0%); /* Adjust the vertical position */
+  border: 2px solid transparent; /* Set a transparent border initially */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Add a shadow effect */
+  transition: box-shadow 0.3s ease-in-out; /* Apply a smooth transition to the shadow */
+
+  /* Add a keyframes animation for the glowing effect */
+  animation: glow 2s infinite alternate; /* Alternating glow effect */
+}
+@keyframes glow {
+  100% {
+    box-shadow: 0px 0px 50px #ffffff33;
+  }
+  100% {
+    box-shadow: 0px 0px 40px rgba(255, 255, 255, 0.6); /* Adjust the color and size of the glow */
+  }
+}
+
+/* Hover effect to increase the glow when hovering */
+.player:hover {
+  box-shadow: 0px 0px 50px rgba(150, 56, 90, 0.6); /* Adjust the color and size of the glow on hover */
+}
+
+.details {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 25px;
+}
+
+.track-art {
+  margin: 25px;
+  width: 250px;
+  height: 250px;
+  background-image: url("https://images.pexels.com/photos/262034/pexels-photo-262034.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260");
+  background-size: contain; /* Set the background size to contain the full image */
+  background-repeat: no-repeat;
+  background-position: center; /* Center the image horizontally and vertically */
+  border-radius: 15%;
+}
+
+.now-playing {
+  font-size: 1rem;
+}
+
+.track-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.track-artist {
+  font-size: 1.3rem;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.playpause-track, .prev-track, .next-track {
+  padding: 15px 20px;
+  opacity: 0.8;
+  color: rgba(150, 56, 90, 1);
+  background-color: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: opacity 0.2s, background-color 0.2s, transform 0.2s;
+  position: relative;
+}
+
+.playpause-track:hover, .prev-track:hover, .next-track:hover {
+  opacity: 1.0;
+  background-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+.playpause-track::before {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: rgba(150, 56, 90, 0.6); /* Color of the trail */
+  border-radius: 50%;
+  opacity: 0;
+  animation: pulse 1s infinite alternate; /* Pulsating animation */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1; /* Behind the play button */
+}
+
+/* Hover effect for the play button */
+.playpause-track:hover {
+  opacity: 1.0;
+  background-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Active (click) styles for the play button */
+.playpause-track:active {
+  transform: translateY(0);
+}
+
+/* Keyframes animation for the trail pulsating effect */
+@keyframes pulse {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+  100% {
+    opacity: 0.6;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.slider_container {
+  width: 100%; /* Set the width to 100% to occupy the full width */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px; /* Add margin to separate from the elements above */
+}
+
+.seek_slider,
+.volume_slider {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%; /* Occupy the full width */
+  height: 5px;
+  background: transparent; /* Transparent track background */
+  outline: none; /* Remove the default focus outline */
+  cursor: pointer;
+}
+
+/* Modify the appearance of the slider thumb */
+.seek_slider::-webkit-slider-thumb,
+.volume_slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  background: rgba(99, 41, 100, 1);
+  border-radius: 50%;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.seek_slider:hover, .volume_slider:hover {
+  opacity: 1.0;
+}
+
+.seek_slider {
+  margin: 0 15px; /* Add horizontal margin to separate from the elements on both sides */
+  width: auto; /* Allow the width to adjust based on content */
+}
+
+.volume_slider {
+  width: 30%;
+}
+
+.current-time, .total-duration {
+  padding: 10px;
+}
+
+i.fa-volume-down, i.fa-volume-up {
+  padding: 10px;
+}
+
+i.fa-play-circle, i.fa-pause-circle, i.fa-step-forward, i.fa-step-backward {
+  cursor: pointer;
+}
+
+/* Add styles for the seek bar animation */
+.seek_slider:hover::-webkit-slider-runnable-track,
+.volume_slider:hover::-webkit-slider-runnable-track {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+
+/* Add styles for the slider thumb (you can customize this further) */
+.seek_slider:hover::-webkit-slider-thumb,
+.volume_slider:hover::-webkit-slider-thumb {
+  background: rgba(150, 56, 90, 1);
+  transform: scale(1.1);
+}
+.seek_slider:active::-webkit-slider-thumb,
+.volume_slider:active::-webkit-slider-thumb {
+  background: rgba(99, 41, 100, 1);
+  transform: scale(1.2);
+}
+
+
+
+
+/* Explore Area */
+/* Styles for the container to arrange player and side section */
+.container {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1200px; /* Set your desired maximum width */
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Styles for the player on the left side */
+.player {
+  width: 70%; /* Adjust the width as needed */
+  /* ... (your player styles) ... */
+}
+
+/* Styles for the side section on the right side */
+.side-section {
+  width: 50%; /* Adjust the width as needed */
+  padding: 20px 0;
+  background: rgba(255, 255, 255, 0);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0);
+}
+
+.side-header {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.side-menu {
+  margin: 50;
+  list-style: none;
+  padding: 0;
+  display: flex; /* Arrange items in a row */
+  flex-direction: row; /* Set the row direction */
+  justify-content: space-between; /* Space them apart horizontally */
+}
+
+
+
+.side-menu li:hover {
+  color: rgba(150, 56, 90, 1);
+}
+
+.lyrics-container {
+  margin-top: 0px;
+  display: none; /* Hide the container by default */
+  padding: 0px; /* Add padding for spacing */
+  color: rgb(255, 255, 255); /* Text color for lyrics */
+  height: 550px; /* Set a fixed height for the lyrics container */
+  overflow-y: scroll; /* Add a vertical scrollbar if content overflows */
+  scrollbar-width: none; /* Hide the default scrollbar for Firefox */
+  -ms-overflow-style: none;
+  /* Other styling as needed */
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap; /* Prevent wrapping to the next line */
+  align-items: center; /* Center-align items horizontally */
+}
+
+/* Create a custom scrollbar for WebKit (Chrome, Safari) */
+.lyrics-container::-webkit-scrollbar {
+  width: 8px; /* Set the width of the scrollbar */
+}
+
+.lyrics-container::-webkit-scrollbar-thumb {
+  background-color: rgba(150, 56, 90, 0.6); /* Set the color of the scrollbar thumb */
+  border-radius: 10px; /* Add rounded corners to the thumb */
+}
+
+/* Adjust the scrollbar appearance on hover */
+.lyrics-container::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(150, 56, 90, 0.8); /* Change color on hover */
+}
+.other-albums {
+  /* Add margin and padding for spacing */
+  margin: 10px;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0); /* Optional background color for spacing visibility */
+  /* Other styling as needed */
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  
+}
+.other-albums img {
+  width: 250px; /* Adjust the width as needed */
+  height: 250px; /* Adjust the height as needed */
+  object-fit: cover; /* Maintain the aspect ratio while covering the container */
+  margin: 0 auto; /* Center-align the image horizontally */
+}
+.other-albums h3 {
+  margin-top: -500px; /* Adjust margin-top to control spacing between the image and name */
+}
+
+/* Style the album year */
+.other-albums p {
+  margin-top: -30px; /* Adjust margin-top to control spacing between the name and year */
+  margin-left: 70px;
+}
